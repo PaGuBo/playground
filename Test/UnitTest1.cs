@@ -73,23 +73,46 @@ namespace Test
         public void CanPrettyPrettyPrint()
         {
             var bt = new BinaryTree<int>();
-            bt.Insert(10);
-
-            bt.Insert(20);
-
-            bt.Insert(5);
-
-            bt.Insert(15);
-            bt.Insert(25);
-            bt.Insert(8);
-            bt.Insert(3);
-
-            bt.Insert(1);
-            bt.Insert(4);
-            bt.Insert(50);
             bt.Insert(100);
 
+            bt.Insert(50);
+            bt.Insert(150);
+
+            bt.Insert(25);
+            bt.Insert(75);
+            bt.Insert(125);
+            bt.Insert(175);
+
+            bt.Insert(32);
+            bt.Insert(18);
+            bt.Insert(82);
+            bt.Insert(68);
+            bt.Insert(132);
+            bt.Insert(118);
+            bt.Insert(182);
+            bt.Insert(168);
+
+
+            bt.Insert(15);
+            bt.Insert(21);
+            bt.Insert(29);
+            bt.Insert(35);
+            bt.Insert(65);
+            bt.Insert(71);
+            bt.Insert(79);
+            bt.Insert(84);
+            bt.Insert(115);
+            bt.Insert(121);
+            bt.Insert(129);
+            bt.Insert(135);
+            bt.Insert(165);
+            bt.Insert(171);
+            bt.Insert(179);
+            bt.Insert(185);
+
+
             var pp = bt.PrettyPrint();
+
         }
     }
 }

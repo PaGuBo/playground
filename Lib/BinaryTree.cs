@@ -107,30 +107,53 @@ namespace Lib
             dict.Remove(lastLevel);
             lastLevel--;
 
-            const string elementPrefix = "[";
-            const string elementSuffix = "]";
-            const int elementWidth = 6;
+            const string elementPrefix = "  [";
+            const string elementSuffix = "]  ";
+            const int elementWidth = 6;  //keep this an even number
             var totalElementWidth = elementPrefix.Length + elementSuffix.Length + elementWidth;
 
             var sb = new StringBuilder();
+            var emptyStr = new string(' ', totalElementWidth);
+            var arrowPadding = new string(' ', (totalElementWidth - 2) / 2);
+            var leftNodeArrow = $"{arrowPadding}//{arrowPadding}";
+            var rightNodeArrow = $"{arrowPadding}\\\\{arrowPadding}";
             foreach (var treeLevel in dict.Keys)
             {
                 var treeLevelVals = dict[treeLevel];
 
+                //figure out how much padding is needed around the element for proper alignment
                 var levelsBelow = lastLevel - treeLevel;
                 var elementsAtLowestLevel = Math.Pow(2, levelsBelow);
                 var stringLengthOfAllLowestElements = elementsAtLowestLevel * totalElementWidth; 
                 var paddingLength = (stringLengthOfAllLowestElements - totalElementWidth) / 2;
                 var padding = new string(' ', Convert.ToInt32(paddingLength));
 
-                var emptyStr = new string(' ', totalElementWidth);
-                foreach (var val in treeLevelVals)
+                var elementsString = new StringBuilder();
+                var branchesString = new StringBuilder();
+                for (var i = 0; i < treeLevelVals.Count; i++)
                 {
-                    var s = val != null ? $"[{ val,elementWidth}]" : emptyStr;
+                    var val = treeLevelVals[i];
+                    string valueString, arrowString;
+                    if (val != null)
+                    {
+                        valueString = $"{elementPrefix}{val,elementWidth}{elementSuffix}";
+                        arrowString = i % 2 != 0 ? rightNodeArrow : leftNodeArrow;
+                    }
+                    else
+                    {
+                        valueString = emptyStr;
+                        arrowString = emptyStr;
+                    }
 
-                    sb.Append($"{padding}{s}{padding}");
+                    branchesString.Append($"{padding}{arrowString}{padding}");
+                    elementsString.Append($"{padding}{valueString}{padding}");
                 }
-                sb.Append("\n");
+
+                if (treeLevel != 0)
+                {
+                    sb.AppendLine(branchesString.ToString());
+                }
+                sb.AppendLine(elementsString.ToString());
             }
             return sb.ToString();
         }

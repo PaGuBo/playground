@@ -9,10 +9,9 @@ namespace Playground
         {
             var bt = new BinaryTree<int>();
             var rand = new Random();
-            for (var i = 0; i < 16; i++)
+            for (var i = 0; i < 32; i++)
             {
-                var v = rand.Next(1, 99);
-                Console.WriteLine($"Inserting {v}");
+                var v = rand.Next(1, 32);
                 bt.Insert(v);
             }
             Console.Write(bt.PrettyPrint());
