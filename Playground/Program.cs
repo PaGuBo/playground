@@ -7,14 +7,16 @@ namespace Playground
     {
         static void Main(string[] args)
         {
-            var bt = new BinaryTree<int>();
+            var bt = new BinaryTree<char>();
             var rand = new Random();
-            for (var i = 0; i < 32; i++)
+            for (var i = 0; i < 20; i++)
             {
-                var v = rand.Next(1, 32);
+                var v = (char)('a' + rand.Next(0, 10));
                 bt.Insert(v);
             }
-            Console.Write(bt.PrettyPrint());
+            const int elementWidth = 2;
+            Console.Write(bt.PrettyPrint("", "", elementWidth));
         }
+        
     }
 }

@@ -52,8 +52,13 @@ namespace Lib
             return breadthFirstList;
         }
 
-        public string PrettyPrint()
+        public string PrettyPrint(string elementPrefix = " [", string elementSuffix = "] ", int elementWidth = 6)
         {
+            if (elementWidth % 2 != 0)
+            {
+                elementWidth++;
+            }
+
             var dict = new Dictionary<int, List<string>>();
 
             var queue = new Queue<Tuple<int, TreeNode<T>>>();
@@ -107,9 +112,6 @@ namespace Lib
             dict.Remove(lastLevel);
             lastLevel--;
 
-            const string elementPrefix = "  [";
-            const string elementSuffix = "]  ";
-            const int elementWidth = 6;  //keep this an even number
             var totalElementWidth = elementPrefix.Length + elementSuffix.Length + elementWidth;
 
             var sb = new StringBuilder();
@@ -136,7 +138,7 @@ namespace Lib
                     string valueString, arrowString;
                     if (val != null)
                     {
-                        valueString = $"{elementPrefix}{val,elementWidth}{elementSuffix}";
+                        valueString = $"{elementPrefix}{val.PadLeft(elementWidth)}{elementSuffix}";
                         arrowString = i % 2 != 0 ? rightNodeArrow : leftNodeArrow;
                     }
                     else
